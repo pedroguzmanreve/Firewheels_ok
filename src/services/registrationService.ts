@@ -30,8 +30,13 @@ export const RegistrationService = {
         created_at: new Date().toISOString(),
       };
 
+      // Remove undefined values, as Firestore doesn't support them
+      const cleanRegistration = Object.fromEntries(
+        Object.entries(newRegistration).filter(([_, v]) => v !== undefined)
+      );
+
       // Save into public_registrations collection (allowed by Security Rules for unauthenticated parents)
-      await setDoc(regDocRef, newRegistration);
+      await setDoc(regDocRef, cleanRegistration);
 
       // If user is authenticated admin (or when creating from admin app), also write to students collection
       const currentUser = AuthService.getCurrentUser();

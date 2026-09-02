@@ -62,7 +62,12 @@ export const StudentsService = {
         id: newDocRef.id,
         created_at: new Date().toISOString(),
       };
-      await setDoc(newDocRef, newStudent);
+      
+      const cleanStudent = Object.fromEntries(
+        Object.entries(newStudent).filter(([_, v]) => v !== undefined)
+      ) as Student;
+
+      await setDoc(newDocRef, cleanStudent);
       return newStudent;
     } catch (error) {
       console.error('Error adding student to Firestore:', error);
@@ -75,7 +80,12 @@ export const StudentsService = {
     try {
       const docRef = doc(db, STUDENTS_COLLECTION, student.id);
       const { id, ...dataToUpdate } = student;
-      await updateDoc(docRef, dataToUpdate);
+      
+      const cleanData = Object.fromEntries(
+        Object.entries(dataToUpdate).filter(([_, v]) => v !== undefined)
+      );
+
+      await updateDoc(docRef, cleanData);
     } catch (error) {
       console.error('Error updating student in Firestore:', error);
       throw error;
