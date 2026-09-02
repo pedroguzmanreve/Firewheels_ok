@@ -1,0 +1,51 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Helper functions
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    // Club configuration: public read for branding, write restricted to admin
+    match /club_config/{configId} {
+      allow read: if true;
+      allow write: if isAuthenticated();
+    }
+
+    // Plans: public read so public registration can display fees, write restricted to admin
+    match /plans/{planId} {
+      allow read: if true;
+      allow write: if isAuthenticated();
+    }
+
+    // Public registrations: Parents can create registrations without reading other records
+    match /public_registrations/{registrationId} {
+      allow create: if request.resource.data.full_name is string
+                    && request.resource.data.document_number is string
+                    && request.resource.data.guardian_name is string
+                    && request.resource.data.accepts_terms == true;
+      allow read, update, delete: if isAuthenticated();
+    }
+
+    // Students: Private student & minor records, only accessible to authenticated admin
+    match /students/{studentId} {
+      allow read, write: if isAuthenticated();
+    }
+
+    // Payments: Private financial information, only accessible to authenticated admin
+    match /payments/{paymentId} {
+      allow read, write: if isAuthenticated();
+    }
+
+    // Attendance: Private attendance records, only accessible to authenticated admin
+    match /attendance/{attendanceId} {
+      allow read, write: if isAuthenticated();
+    }
+
+    // Default deny for all other collections
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

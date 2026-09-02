@@ -1,0 +1,6 @@
+{
+  "name": "Club Deportivo Fire Wheels",
+  "description": "Sistema de gestión intuitivo para el Club Deportivo Fire Wheels: inscripciones de deportistas, toma de asistencia, gestión de planes y cobros por WhatsApp.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

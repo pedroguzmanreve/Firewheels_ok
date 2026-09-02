@@ -1,0 +1,83 @@
+{
+  "entities": {
+    "ClubConfig": {
+      "collection": "club_config",
+      "fields": {
+        "name": { "type": "string" },
+        "subtitle": { "type": "string" },
+        "enrollment_fee": { "type": "number" },
+        "phone": { "type": "string" },
+        "address": { "type": "string" },
+        "bank_details": { "type": "string" },
+        "logo_url": { "type": "string" }
+      }
+    },
+    "Plan": {
+      "collection": "plans",
+      "fields": {
+        "name": { "type": "string" },
+        "weekly_classes": { "type": "number" },
+        "price": { "type": "number" },
+        "created_at": { "type": "string" }
+      }
+    },
+    "Student": {
+      "collection": "students",
+      "fields": {
+        "full_name": { "type": "string" },
+        "birth_date": { "type": "string" },
+        "document_number": { "type": "string" },
+        "phone": { "type": "string" },
+        "address": { "type": "string" },
+        "neighborhood": { "type": "string" },
+        "medical_entity": { "type": "string" },
+        "mother_name": { "type": "string" },
+        "father_name": { "type": "string" },
+        "guardian_name": { "type": "string" },
+        "guardian_phone": { "type": "string" },
+        "guardian_id_number": { "type": "string" },
+        "accepts_terms": { "type": "boolean" },
+        "status": { "type": "string" },
+        "plan_id": { "type": "string" },
+        "enrollment_fee_paid": { "type": "boolean" },
+        "created_at": { "type": "string" }
+      }
+    },
+    "Payment": {
+      "collection": "payments",
+      "fields": {
+        "student_id": { "type": "string" },
+        "amount": { "type": "number" },
+        "payment_method": { "type": "string" },
+        "payment_date": { "type": "string" },
+        "period_month": { "type": "string" },
+        "period_year": { "type": "number" },
+        "created_at": { "type": "string" }
+      }
+    },
+    "Attendance": {
+      "collection": "attendance",
+      "fields": {
+        "student_id": { "type": "string" },
+        "date": { "type": "string" },
+        "status": { "type": "string" },
+        "created_at": { "type": "string" }
+      }
+    },
+    "PublicRegistration": {
+      "collection": "public_registrations",
+      "fields": {
+        "full_name": { "type": "string" },
+        "birth_date": { "type": "string" },
+        "document_number": { "type": "string" },
+        "guardian_name": { "type": "string" },
+        "guardian_phone": { "type": "string" },
+        "guardian_id_number": { "type": "string" },
+        "accepts_terms": { "type": "boolean" },
+        "plan_id": { "type": "string" },
+        "created_at": { "type": "string" },
+        "status": { "type": "string" }
+      }
+    }
+  }
+}
