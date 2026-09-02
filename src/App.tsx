@@ -172,22 +172,6 @@ export default function App() {
     setAttendance(newRecords);
   };
 
-  const handleResetData = async () => {
-    if (
-      confirm(
-        '¿Está segura de sincronizar / restaurar los datos de demostración en Firestore? Esto inicializará los planes, estudiantes y asistencias base.'
-      )
-    ) {
-      setIsDataLoading(true);
-      try {
-        await StorageService.resetToDefault();
-        await loadAdminData();
-      } finally {
-        setIsDataLoading(false);
-      }
-    }
-  };
-
   const handleLogout = async () => {
     await AuthService.logout();
     setStudents([]);
@@ -347,16 +331,7 @@ export default function App() {
           </div>
 
           <div className="flex items-center gap-4">
-            {currentUser && (
-              <button
-                onClick={handleResetData}
-                className="text-stone-500 hover:text-stone-800 flex items-center gap-1 transition-colors"
-                title="Inicializar datos base en Firestore"
-              >
-                <RotateCcw className="w-3.5 h-3.5" />
-                <span>Sincronizar Datos Iniciales Firestore</span>
-              </button>
-            )}
+            {/* The reset data button has been removed for production */}
           </div>
         </div>
       </footer>

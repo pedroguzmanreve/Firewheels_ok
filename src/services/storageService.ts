@@ -72,14 +72,4 @@ export const StorageService = {
   async submitPublicRegistration(studentData: Omit<Student, 'id' | 'created_at'>): Promise<Student> {
     return await RegistrationService.submitRegistration(studentData);
   },
-
-  // Safe seed / default reset for initial setup
-  async resetToDefault(): Promise<void> {
-    await Promise.all([
-      PlansService.seedInitialPlans(),
-      StudentsService.seedInitialStudents(),
-      PaymentsService.seedInitialPayments(),
-      AttendanceService.seedInitialAttendance(),
-    ]);
-  },
 };

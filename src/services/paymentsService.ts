@@ -30,17 +30,13 @@ export const PaymentsService = {
       }
 
       const snapshot = await getDocs(q);
-      if (!snapshot.empty) {
-        return snapshot.docs.map((docSnap) => ({
-          ...(docSnap.data() as Omit<Payment, 'id'>),
-          id: docSnap.id,
-        }));
-      }
-
-      return INITIAL_PAYMENTS;
+      return snapshot.docs.map((docSnap) => ({
+        ...(docSnap.data() as Omit<Payment, 'id'>),
+        id: docSnap.id,
+      }));
     } catch (error) {
-      console.warn('Error fetching payments from Firestore, using initial payments:', error);
-      return INITIAL_PAYMENTS;
+      console.error('Error fetching payments from Firestore:', error);
+      return [];
     }
   },
 

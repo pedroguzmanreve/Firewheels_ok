@@ -25,18 +25,13 @@ export const StudentsService = {
         : query(collection(db, STUDENTS_COLLECTION), orderBy('created_at', 'desc'));
 
       const snapshot = await getDocs(q);
-      if (!snapshot.empty) {
-        return snapshot.docs.map((docSnap) => ({
-          ...(docSnap.data() as Omit<Student, 'id'>),
-          id: docSnap.id,
-        }));
-      }
-
-      // If empty in development / first run, fallback
-      return INITIAL_STUDENTS;
+      return snapshot.docs.map((docSnap) => ({
+        ...(docSnap.data() as Omit<Student, 'id'>),
+        id: docSnap.id,
+      }));
     } catch (error) {
-      console.warn('Error fetching students from Firestore, using initial students:', error);
-      return INITIAL_STUDENTS;
+      console.error('Error fetching students from Firestore:', error);
+      return [];
     }
   },
 

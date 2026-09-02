@@ -20,16 +20,13 @@ export const PlansService = {
     try {
       const q = query(collection(db, PLANS_COLLECTION), orderBy('weekly_classes', 'asc'));
       const snapshot = await getDocs(q);
-      if (!snapshot.empty) {
-        return snapshot.docs.map((docSnap) => ({
-          ...(docSnap.data() as Omit<Plan, 'id'>),
-          id: docSnap.id,
-        }));
-      }
-      return INITIAL_PLANS;
+      return snapshot.docs.map((docSnap) => ({
+        ...(docSnap.data() as Omit<Plan, 'id'>),
+        id: docSnap.id,
+      }));
     } catch (error) {
-      console.warn('Error fetching plans from Firestore, using initial plans:', error);
-      return INITIAL_PLANS;
+      console.error('Error fetching plans from Firestore:', error);
+      return [];
     }
   },
 

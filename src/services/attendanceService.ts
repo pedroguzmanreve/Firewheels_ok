@@ -25,17 +25,13 @@ export const AttendanceService = {
       }
 
       const snapshot = await getDocs(q);
-      if (!snapshot.empty) {
-        return snapshot.docs.map((docSnap) => ({
-          ...(docSnap.data() as Omit<AttendanceRecord, 'id'>),
-          id: docSnap.id,
-        }));
-      }
-
-      return INITIAL_ATTENDANCE;
+      return snapshot.docs.map((docSnap) => ({
+        ...(docSnap.data() as Omit<AttendanceRecord, 'id'>),
+        id: docSnap.id,
+      }));
     } catch (error) {
-      console.warn('Error fetching attendance from Firestore, using initial attendance:', error);
-      return INITIAL_ATTENDANCE;
+      console.error('Error fetching attendance from Firestore:', error);
+      return [];
     }
   },
 
